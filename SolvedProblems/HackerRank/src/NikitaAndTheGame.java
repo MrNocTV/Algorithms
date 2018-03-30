@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.function.BinaryOperator;
 
 /**
  * 
@@ -56,14 +55,6 @@ public class NikitaAndTheGame {
 		return i;
 	}
 	
-	static final BinaryOperator<Long> adder = new BinaryOperator<Long>() {
-
-		@Override
-		public Long apply(Long a, Long b) {
-			return a+b;
-		}
-	};
-
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
@@ -77,7 +68,7 @@ public class NikitaAndTheGame {
 		for (int t = 1; t <= T; ++t) {
 			n = Integer.parseInt(br.readLine());
 			arr = (Long[]) Arrays.stream(br.readLine().trim().split(" ")).map(Long::parseLong).toArray(Long[]::new);
-			Long total = Arrays.stream(arr).reduce(0l, adder);
+			Long total = Arrays.stream(arr).reduce(0l, (a, b) -> a+b);
 			if(total == 0) { // corner case
 				sb.append((n-1) + "\n");
 			} else {
