@@ -6,6 +6,16 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * 
+ * @author Loc Truong Van
+ * @category Algorithm
+ * @site GeeksForGeeks
+ * @link https://practice.geeksforgeeks.org/problems/print-binary-tree-levels-in-sorted-order/0
+ * @idea Use SortedSet in Java, every level has 2^i (i is level) nodes
+ * 
+ */
+
 public class BinaryTreeLevelsInSortedOrder {
 
 	static void levelTraverse(Integer[] arr) {

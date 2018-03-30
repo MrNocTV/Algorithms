@@ -1,5 +1,15 @@
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Loc Truong Van
+ * @category Algorithm
+ * @site HackerRank
+ * @link https://www.hackerrank.com/challenges/recursive-digit-sum/problem
+ * @idea easy pass, simple recursion
+ * 
+ */
+
 public class RecursiveDigitSum {
 	
 	static int sumDigitOfNumber(String n) {
