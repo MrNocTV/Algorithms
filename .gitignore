@@ -1,4 +1,5 @@
 *.classpath.DS_Store
-.classpath
-.project
+SolvedProblems/.classpath
+Utilities/.gitignore
+Utilities/.classpath
 
