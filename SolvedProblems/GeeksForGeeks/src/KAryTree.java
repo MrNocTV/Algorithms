@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author Loc Truong Van
  * @category Algorithm
  * @site GeeksForGeeks
- * @link https://practice.geeksforgeeks.org/problems/geek-and-strings/0
+ * @link https://practice.geeksforgeeks.org/problems/k-ary-tree/0
  * @idea Just use JAVA's BigInteger
  * 
  */
