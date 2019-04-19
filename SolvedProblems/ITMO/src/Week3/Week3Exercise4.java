@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class Week3Exercise4 {
 
@@ -63,42 +65,27 @@ public class Week3Exercise4 {
 
 	public static int[] solve(int N) {
 		if (N == 1)
-			return new int[] {1};
+			return new int[] { 1 };
 		else if (N == 2)
-			return new int[] {1, 2};
-		int[] arr = new int[N];
-		if (N % 2 == 1) {
-			int mid = N / 2;
-			int start = N - 2;
-			int i = 0;
-			while (start >= 1) {
-				arr[i++] = start;
-				start -= 2;
-			}
-			arr[mid] = N;
-			start = N - 1;
-			i = mid + 1;
-			while (start >= 2) {
-				arr[i++] = start;
-				start -= 2;
-			}
-		} else {
-			int mid = N / 2 - 1;
-			int start = N - 2;
-			int i = 0;
-			while (start >= 2) {
-				arr[i++] = start;
-				start -= 2;
-			}
-			arr[mid] = N;
-			i = mid + 1;
-			start = N - 1;
-			while (start >= 1) {
-				arr[i++] = start;
-				start -= 2;
-			}
+			return new int[] { 1, 2 };
+		List<Integer> arrList = new ArrayList<>(N);
+		arrList.add(1);
+		arrList.add(3);
+		arrList.add(2);
+
+		int mid = 1;
+		int temp;
+		boolean moveMid = false;
+		for (int i = 4; i <= N; ++i) {
+			moveMid = arrList.size() % 2 != 0;
+			temp = arrList.get(mid);
+			arrList.set(mid, i);
+			arrList.add(temp);
+
+			mid += moveMid ? 1 : 0;
 		}
-		return arr;
+
+		return arrList.stream().mapToInt(Integer::valueOf).toArray();
 	}
 
 	public static void main(String[] args) throws IOException {
