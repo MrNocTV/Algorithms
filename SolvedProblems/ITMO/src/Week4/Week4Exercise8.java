@@ -6,10 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.time.Instant;
 
 public class Week4Exercise8 {
 
@@ -50,39 +47,34 @@ public class Week4Exercise8 {
 		}
 	}
 
-	 public static void sort(String[] a, int k, int[] order) {
-	        int n = a.length;
-	        int R = 123;   // extend ASCII alphabet size
-	        String[] aux = new String[n];
-	        int[] auxO = new int[n];
-	        int o;
-	        int w = a[0].length();
+	public static void sort(byte[] a, int[] order, int k, int n, int m) {
+		int R = 26;
+		int[] auxOrder = new int[n];
+		int last = m*n;
+		int o;
+		for (int d = 1; d <= k; ++d) {
+			int[] count = new int[R + 1];
+			for (int i = last-n; i < last; ++i) {
+				count[a[i]+1]++;
+			}
+			
+			for (int r = 0; r < R; ++r) {
+				count[r + 1] += count[r];
+			}
+			int j= 0;
+			int temp = last - n-1;
+			for (int i = 0; i < n; ++i) {
+//				System.out.println(temp + order[i]);
+				auxOrder[count[a[temp+order[i]]]++] = order[j++];
+			}
+			for (int i = 0; i < n; ++i)
+				order[i] = auxOrder[i];
+//			System.out.println("aux order " + Arrays.toString(auxOrder));
+//			System.out.println("order " + Arrays.toString(order));
+			last -= n;
+		}
 
-	        for (int d = w-1; d >= w-k; d--) {
-	            // sort by key-indexed counting on dth character
-
-	            // compute frequency counts
-	            int[] count = new int[R+1];
-	            for (int i = 0; i < n; i++)
-	                count[a[i].charAt(d) + 1]++;
-
-	            // compute cumulates
-	            for (int r = 0; r < R; r++)
-	                count[r+1] += count[r];
-
-	            // move data
-	            for (int i = 0; i < n; i++) {
-	            	o = count[a[i].charAt(d)]++;
-	            	auxO[o] = order[i];
-	                aux[o] = a[i];
-	            }
-	            // copy back
-	            for (int i = 0; i < n; i++) {
-	                a[i] = aux[i];
-	                order[i] = auxO[i];
-	            }
-	        }
-	    }
+	}
 
 	public static void main(String[] args) throws Exception {
 		Scan scan = new Scan(new FileInputStream(new File("input.txt")));
@@ -90,41 +82,33 @@ public class Week4Exercise8 {
 		int n = scan.nextInt();
 		int m = scan.nextInt();
 		int k = scan.nextInt();
-		int c;
+		byte[] input = new byte[n*m];
+		byte c;
+		byte base = 97;
 		int offset = 0;
-		StringBuilder[] input = new StringBuilder[n];
-		int[] order = new int[n];
-		
-		for (int i = 0; i < input.length; ++i)
-			input[i] = new StringBuilder();
-		
-		while ((c = scan.read()) != -1) {
-			if (c >= 97 && c <= 122) {
-				input[offset].append((char)c);
-				if (offset >= n - 1) {
-					offset = 0;
-				} else {
-					++offset;
-				}
+		int row = 0;
 
-			}
+		int[] order = new int[n];
+		Instant start = Instant.now();
+		while ((c = scan.read()) != -1) {
+			if (c >= 97 && c <= 122)
+				input[offset++] = (byte)(c - 97);
 		}
-		
+
 		for (int i = 1; i <= n; ++i) {
 			order[i - 1] = i;
 		}
-		
-		String[] strings = new String[n];
-		for (int i = 0; i < strings.length; ++i)
-			strings[i] = input[i].toString();
-		
-		sort(strings, k, order);
-		
+//		System.out.println("read took " + Duration.between(start, Instant.now()).toMillis() + "ms");
+//		System.out.println(Arrays.toString(input));
+		start = Instant.now();
+//		System.out.println(Arrays.toString(order));
+		sort(input, order, k, n, m);
+//		System.out.println("sort took " + Duration.between(start, Instant.now()).toMillis() + "ms");
+//		System.out.println(Arrays.toString(order));
 		StringBuilder sb = new StringBuilder();
-		for (int j : order)
-			sb.append(j + " ");
+		for (int i : order)
+			sb.append(i + " ");
 		bw.write(sb.toString().trim() + "\n");
 		bw.close();
-
 	}
 }
