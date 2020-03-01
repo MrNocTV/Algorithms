@@ -2,4 +2,8 @@
 SolvedProblems/.classpath
 Utilities/.gitignore
 Utilities/.classpath
-
+*.class
+*.classpath
+*.idea
+*.project
+*bin*
