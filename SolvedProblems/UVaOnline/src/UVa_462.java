@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Main {
+public class UVa_462 {
 
 	interface Rule {
 		int apply(List<Card> cards);
