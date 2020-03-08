@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-class Main {
+public class UVa_489 {
 
 	public static void main(String[] args) throws IOException {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
