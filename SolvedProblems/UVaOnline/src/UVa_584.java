@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-class Main {
+public class UVa_584 {
 
 	static class Frame {
 		char firstTry;
